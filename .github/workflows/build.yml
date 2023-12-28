@@ -40,12 +40,9 @@ jobs:
   Analysis:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Clear SonarQube Scanner Cache
-        run: rm -rf $HOME/.sonar/cache
-    
+    steps:    
       - name: Analyze with SonarQube
-        uses: SonarSource/sonarqube-scan-action@7295e71c9583053f5bf40e9d4068a0c974603ec8
+        uses: SonarSource/sonarqube-scan-action@latest_version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -53,9 +50,3 @@ jobs:
         with:
           args:
             -Dsonar.projectKey=tp_ci
-    
-      - name: Run SonarQube Scanner with Debug Output
-        run: |
-          set -x
-          sonar-scanner -X
-
